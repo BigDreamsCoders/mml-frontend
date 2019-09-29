@@ -1,5 +1,5 @@
 import React from 'react';
-import Song from './Song.js';
+import Song from './components/Song.js/index.js';
 
 const SongList = (props) => (
   <div>
