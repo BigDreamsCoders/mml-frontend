@@ -6,7 +6,6 @@ export const Form = props => {
       {props.info.data.map((self, index) => {
         return (
           <div className="form-group" key={index}>
-            <label htmlFor={self.name}>{self.label}</label>
             <input
               className="form-control"
               type={self.type}
@@ -21,6 +20,7 @@ export const Form = props => {
       <button className="btn btn-primary" onClick={props.loginHandle}>
         {props.info.action}
       </button>
+      {props.login && <a></a>}
     </form>
   );
 };

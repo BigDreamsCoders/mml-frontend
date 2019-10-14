@@ -1,5 +1,5 @@
 import React from "react";
-import SongList from "./components/SongList.js/index.js";
+import SongList from "./components/SongList.js";
 import "./App.css";
 
 const data = [
