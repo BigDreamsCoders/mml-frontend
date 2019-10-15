@@ -1,3 +1,10 @@
+.floating {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+}
+
 main {
   display: flex;
   justify-content: center;
@@ -37,12 +44,18 @@ input {
   margin: 0 auto;
 }
 
-button {
+form>button {
   width: 80%;
   margin: 0 auto;
   height: 40px;
   border: none !important;
   background: rgba(255, 138, 128, 0.5) !important;
+}
+
+form>a {
+  align-self: flex-end;
+  color: rgba(255, 255, 255, 0.5) !important;
+  margin: 0 0.5em 0;
 }
 
 button:hover {
