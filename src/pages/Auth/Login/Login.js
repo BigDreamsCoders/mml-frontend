@@ -1,13 +1,13 @@
 import React from "react";
 import { Form } from "../../../components/Form";
-import style from "./../Auth.module.css";
 import { auth } from "../../../axios/instance/auth";
-import { Alert } from "reactstrap";
+import { AuthWrapper } from "../Wrapper";
 
 const initState = {
   email: "",
   password: "",
   error: false,
+  errorMsg: "",
   info: {
     action: "Login",
     data: [
@@ -28,6 +28,7 @@ const initState = {
 export class Login extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = { ...initState };
     this.handleLogin = this.handleLogin.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -42,6 +43,7 @@ export class Login extends React.Component {
   }
 
   async handleLogin(event) {
+    const { handleLogin } = this.props;
     event.preventDefault();
     const { email, password } = this.state;
     try {
@@ -49,6 +51,7 @@ export class Login extends React.Component {
         email,
         password
       });
+      handleLogin(data.token);
       window.localStorage.setItem("token", data.token);
     } catch (error) {
       this.setState(
@@ -77,27 +80,17 @@ export class Login extends React.Component {
   }
 
   render() {
-    const { error } = this.state;
+    const { email, password, error, errorMsg } = this.state;
     return (
-      <main>
-        <div className={style.floating}>
-          <Alert color="danger" isOpen={error} toggle={this.onDismiss}>
-            que pex
-          </Alert>
-        </div>
-        <video autoPlay muted loop id="video">
-          <source src="video/concert.mp4" type="video/mp4" />
-        </video>
-        <div className={style.login}>
-          <Form
-            info={this.state.info}
-            actionHandler={this.handleLogin}
-            changeHandle={this.handleChange}
-            values={[this.state.email, this.state.password]}
-            login
-          />
-        </div>
-      </main>
+      <AuthWrapper error={error} onDismiss={this.onDismiss} errorMsg={errorMsg}>
+        <Form
+          info={this.state.info}
+          actionHandler={this.handleLogin}
+          changeHandle={this.handleChange}
+          values={[email, password]}
+          login
+        />
+      </AuthWrapper>
     );
   }
 }

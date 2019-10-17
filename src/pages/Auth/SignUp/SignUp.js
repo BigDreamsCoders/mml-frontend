@@ -1,8 +1,7 @@
 import React from "react";
 import { Form } from "../../../components/Form";
-import { Alert } from "reactstrap";
-import style from "./../Auth.module.css";
 import { auth } from "../../../axios/instance/auth";
+import { AuthWrapper } from "../Wrapper";
 
 const initState = {
   email: "",
@@ -79,27 +78,17 @@ export class SignUp extends React.Component {
   }
 
   render() {
-    const { info, email, password, error } = this.state;
+    const { info, email, password, error, errorMsg } = this.state;
     return (
-      <main>
-        <div className={style.floating}>
-          <Alert color="danger" isOpen={error} toggle={this.onDismiss}>
-            que pex
-          </Alert>
-        </div>
-        <video autoPlay muted loop id="video">
-          <source src="video/concert.mp4" type="video/mp4" />
-        </video>
-        <div className={style.login}>
-          <Form
-            info={info}
-            actionHandler={this.registerHandler}
-            changeHandle={this.changeHanlder}
-            values={[email, password]}
-            register
-          />
-        </div>
-      </main>
+      <AuthWrapper error={error} onDismiss={this.onDismiss} errorMsg={errorMsg}>
+        <Form
+          info={info}
+          actionHandler={this.registerHandler}
+          changeHandle={this.changeHanlder}
+          values={[email, password]}
+          register
+        />
+      </AuthWrapper>
     );
   }
 }
