@@ -4,7 +4,15 @@ import { FormGroup, Input, Button } from "reactstrap";
 import PropTypes from "prop-types";
 
 export const Form = props => {
-  const { login, register, info, values, changeHandle, actionHandler } = props;
+  const {
+    login,
+    register,
+    info,
+    values,
+    changeHandle,
+    actionHandler,
+    loading
+  } = props;
   return (
     <form>
       {props.info.data.map((self, index) => {
@@ -20,9 +28,18 @@ export const Form = props => {
           </FormGroup>
         );
       })}
-      <Button className="btn btn-primary" onClick={actionHandler}>
-        {info.action}
-      </Button>
+      {loading ? (
+        <div className="lds-ellipsis">
+          <div />
+          <div />
+          <div />
+          <div />
+        </div>
+      ) : (
+        <Button className="btn btn-primary" onClick={actionHandler}>
+          {info.action}
+        </Button>
+      )}
       {login && <Link to="/register">Don't have an account?</Link>}
       {register && <Link to="/login">Have an account?</Link>}
     </form>
@@ -43,6 +60,7 @@ Form.propTypes = {
   changeHandle: PropTypes.func.isRequired,
   actionHandler: PropTypes.func.isRequired,
   values: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
   login: PropTypes.bool,
   register: PropTypes.bool
 };

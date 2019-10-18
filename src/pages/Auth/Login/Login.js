@@ -6,6 +6,7 @@ import { AuthWrapper } from "../Wrapper";
 const initState = {
   email: "",
   password: "",
+  loading: false,
   error: false,
   errorMsg: "",
   info: {
@@ -42,33 +43,44 @@ export class Login extends React.Component {
     });
   }
 
-  async handleLogin(event) {
+  handleLogin(event) {
     const { handleLogin } = this.props;
     event.preventDefault();
     const { email, password } = this.state;
-    try {
-      const { data } = await auth.post("login", {
-        email,
-        password
-      });
-      handleLogin(data.token);
-      window.localStorage.setItem("token", data.token);
-    } catch (error) {
-      this.setState(
-        {
-          ...this.state,
-          error: true
-        },
-        () => {
-          window.setTimeout(() => {
-            this.setState({
-              ...this.state,
-              error: false
+    this.setState(
+      {
+        ...this.state,
+        loading: true
+      },
+      () => {
+        window.setTimeout(async () => {
+          try {
+            const { data } = await auth.post("login", {
+              email,
+              password
             });
-          }, 2000);
-        }
-      );
-    }
+            handleLogin(data.token);
+          } catch (error) {
+            this.setState(
+              {
+                ...this.state,
+                error: true,
+                loading: false,
+                errorMsg: "Something gone wrong, try again"
+              },
+              () => {
+                window.setTimeout(() => {
+                  this.setState({
+                    ...this.state,
+                    error: false
+                  });
+                }, 2000);
+              }
+            );
+          }
+        }, 2000);
+      }
+    );
   }
 
   handleChange(event) {
@@ -80,7 +92,7 @@ export class Login extends React.Component {
   }
 
   render() {
-    const { email, password, error, errorMsg } = this.state;
+    const { email, password, error, errorMsg, loading } = this.state;
     return (
       <AuthWrapper error={error} onDismiss={this.onDismiss} errorMsg={errorMsg}>
         <Form
@@ -88,6 +100,7 @@ export class Login extends React.Component {
           actionHandler={this.handleLogin}
           changeHandle={this.handleChange}
           values={[email, password]}
+          loading={loading}
           login
         />
       </AuthWrapper>
