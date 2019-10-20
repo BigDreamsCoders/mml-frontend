@@ -3,15 +3,10 @@
 
 body {
   margin: 0;
-  font-family: 'Be Vietnam', sans-serif;
+  font-family: 'Be Vietnam', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }
 
 .form-control {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "../../../components/Form";
 import { auth } from "../../../axios/instance/auth";
-import { AuthWrapper } from "../Wrapper";
+import { AuthWrapper } from "../../../layout/Auth/AuthLayout";
 
 const initState = {
   email: "",
@@ -94,7 +94,12 @@ export class Login extends React.Component {
   render() {
     const { email, password, error, errorMsg, loading } = this.state;
     return (
-      <AuthWrapper error={error} onDismiss={this.onDismiss} errorMsg={errorMsg}>
+      <AuthWrapper
+        title="Login"
+        error={error}
+        onDismiss={this.onDismiss}
+        errorMsg={errorMsg}
+      >
         <Form
           info={this.state.info}
           actionHandler={this.handleLogin}

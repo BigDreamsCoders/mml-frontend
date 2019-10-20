@@ -1,3 +1,5 @@
+@import "src/mixins.scss";
+
 $primaryColorBlured:rgba(255, 138, 128, 0.5);
 $primaryColorHovered:rgba(255, 138, 128, 0.7);
 $fontWhite:rgba(255, 255, 255, 0.5);
@@ -9,7 +11,7 @@ $fontWhite:rgba(255, 255, 255, 0.5);
   top: 0;
 }
 
-main {
+.main {
   display: flex !important;
   justify-content: center;
   align-items: center;
@@ -20,7 +22,7 @@ main {
   background-size: cover;
 }
 
-video {
+.video {
   position: fixed;
   visibility: hidden;
   min-width: 100%;
@@ -76,17 +78,13 @@ input {
   text-transform: capitalize;
 }
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {}
+@include responsive-max(xs) {}
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {}
+@include responsive-min(xs) {}
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {}
+@include responsive-min(md) {}
 
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+@include responsive-min(ld) {
   .formContainer {
     width: 60%;
   }
@@ -98,9 +96,8 @@ input {
   }
 }
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  video {
+@include responsive-min(xl) {
+  .video {
     visibility: visible;
   }
 

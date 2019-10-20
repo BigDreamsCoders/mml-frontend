@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "../../../components/Form";
 import { auth } from "../../../axios/instance/auth";
-import { AuthWrapper } from "../Wrapper";
+import { AuthWrapper } from "../../../layout/Auth/AuthLayout";
 
 const initState = {
   email: "",
@@ -70,7 +70,7 @@ export class SignUp extends React.Component {
                 ...this.state,
                 error: true,
                 errorMsg: "An error occurred",
-                loading:false,
+                loading: false
               },
               () => {
                 window.setTimeout(() => {
@@ -97,7 +97,12 @@ export class SignUp extends React.Component {
   render() {
     const { info, email, password, error, errorMsg, loading } = this.state;
     return (
-      <AuthWrapper error={error} onDismiss={this.onDismiss} errorMsg={errorMsg}>
+      <AuthWrapper
+        title="SignUp"
+        error={error}
+        onDismiss={this.onDismiss}
+        errorMsg={errorMsg}
+      >
         <Form
           info={info}
           actionHandler={this.registerHandler}

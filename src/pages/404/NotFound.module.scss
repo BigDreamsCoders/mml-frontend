@@ -1,0 +1,38 @@
+@import "src/mixins.scss";
+
+.main {
+  min-height: 100vh;
+  min-width: 100%;
+  max-height: 100vh;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  img {
+    width: 80%;
+    height: 90%;
+  }
+
+  h2 {
+    text-align: center;
+  }
+}
+
+@include responsive-max(xs) {}
+
+@include responsive-min(xs) {}
+
+@include responsive-min(md) {}
+
+@include responsive-min(ld) {}
+
+@include responsive-min(xl) {
+  .main {
+    img {
+      width: 30%;
+      height: 30%;
+    }
+  }
+}
