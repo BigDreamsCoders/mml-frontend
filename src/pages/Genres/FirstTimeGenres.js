@@ -8,3 +8,7 @@ export const FirstTimeGenres = props => {
     </MainLayout>
   );
 };
+
+const GenresList = () => { 
+  
+}

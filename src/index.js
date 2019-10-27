@@ -8,8 +8,9 @@ import { LoginReducer } from "./reducers/Reducer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ContextRoute } from "./components/Route/ContextRoute";
 import { Constants } from "./utils/Constants";
-import "./index.scss";
+import "pace-js";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.scss";
 
 const initState = {
   token: window.localStorage.getItem(Constants.TOKEN) || ""

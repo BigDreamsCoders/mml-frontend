@@ -61,6 +61,12 @@ $fontWhite:rgba(255, 255, 255, 0.5);
       align-self: flex-end;
       color: $fontWhite !important;
       margin: .4em .5em 0;
+      transition: 0.2s all ease-in-out;
+
+      &:hover {
+        text-decoration: none;
+        color: $primaryColorHovered !important;
+      }
     }
 
     div:nth-child(3) {

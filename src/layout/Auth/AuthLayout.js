@@ -11,15 +11,15 @@ export const AuthWrapper = props => {
       <Helmet>
         <title>{title}</title>
       </Helmet>
-      <main className={main}>
+      <main className={`${main} Fade`}>
         <div className={floating}>
           <Alert color="danger" isOpen={error} toggle={onDismiss}>
             {errorMsg}
           </Alert>
         </div>
-        <video autoPlay muted loop id="video" className={video}>
+        {/* <video autoPlay muted loop id="video" className={video}>
           <source src="video/concert.mp4" type="video/mp4" />
-        </video>
+        </video> */}
         <div className={formContainer}>{children}</div>
       </main>
     </>

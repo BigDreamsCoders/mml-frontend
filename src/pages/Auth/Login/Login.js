@@ -29,7 +29,6 @@ const initState = {
 export class Login extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = { ...initState };
     this.handleLogin = this.handleLogin.bind(this);
     this.handleChange = this.handleChange.bind(this);
