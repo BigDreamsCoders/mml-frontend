@@ -1,0 +1,36 @@
+$breakpoints:(exsm:600px,
+  sm:600px,
+  md:768px,
+  ld:992px,
+  xl:1200px);
+
+
+@mixin responsive-max($breakpoint) {
+
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-size: map-get($breakpoints, $breakpoint);
+
+    @media only screen and (max-width:$breakpoint-size) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "invalid breakpoint";
+  }
+}
+
+@mixin responsive-min($breakpoint) {
+
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-size: map-get($breakpoints, $breakpoint);
+
+    @media only screen and (min-width:$breakpoint-size) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "invalid breakpoint";
+  }
+}
