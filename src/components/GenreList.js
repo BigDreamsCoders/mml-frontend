@@ -6,7 +6,7 @@ export const GenreList = props => {
   return (
     <>
       {list.map((element, index) => (
-        <></>
+        <p>{element.name}</p>
       ))}
     </>
   );

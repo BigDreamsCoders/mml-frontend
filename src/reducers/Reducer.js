@@ -13,7 +13,7 @@ export const LoginReducer = (state, action) => {
       window.localStorage.removeItem(Constants.TOKEN);
       return {
         ...state,
-        toke: ""
+        token: ""
       };
     default:
       return state;
