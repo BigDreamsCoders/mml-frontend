@@ -7,3 +7,5 @@
 .prettierignore
 .prettierrc
 .env.*
+package.json
+package-lock.json
