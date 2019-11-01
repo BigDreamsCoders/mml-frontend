@@ -45,5 +45,12 @@
         "husky": "^3.0.9",
         "prettier": "^1.18.2",
         "react-test-renderer": "^16.10.2"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit-msg": ".git/hooks/my-preparecommit-msg.sample",
+            "pre-commit": "npm run apply-format",
+            "pre-push": "npm run check-format"
+        }
     }
 }
