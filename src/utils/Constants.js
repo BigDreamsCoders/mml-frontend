@@ -1,3 +1,3 @@
 export const Constants = {
-  TOKEN: "token"
+	TOKEN: "token",
 };

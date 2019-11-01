@@ -13,37 +13,37 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 
 const initState = {
-  token: window.localStorage.getItem(Constants.TOKEN) || ""
+	token: window.localStorage.getItem(Constants.TOKEN) || "",
 };
 
 const AuthContext = createContext();
 
 const App = () => {
-  const [state, dispatch] = useReducer(LoginReducer, initState);
-  return (
-    <Router>
-      <Switch>
-        <ContextRoute
-          path="/login"
-          exact
-          component={Login}
-          Context={AuthContext}
-          value={state}
-          dispatch={dispatch}
-        />
-        <ContextRoute
-          path="/register"
-          exact
-          component={SignUp}
-          Context={AuthContext}
-          value={state}
-          dispatch={dispatch}
-        />
-        <Route path="/first-time" exact component={FirstTimeGenres} />
-        <Route path="/" component={NotFound} />
-      </Switch>
-    </Router>
-  );
+	const [state, dispatch] = useReducer(LoginReducer, initState);
+	return (
+		<Router>
+			<Switch>
+				<ContextRoute
+					path="/login"
+					exact
+					component={Login}
+					Context={AuthContext}
+					value={state}
+					dispatch={dispatch}
+				/>
+				<ContextRoute
+					path="/register"
+					exact
+					component={SignUp}
+					Context={AuthContext}
+					value={state}
+					dispatch={dispatch}
+				/>
+				<Route path="/first-time" exact component={FirstTimeGenres} />
+				<Route path="/" component={NotFound} />
+			</Switch>
+		</Router>
+	);
 };
 
 ReactDOM.render(<App />, document.getElementById("root"));
