@@ -1,0 +1,9 @@
+*.scss
+*.txt
+*.png
+/public/
+.editorconfig
+.gitignore
+.prettierignore
+.prettierrc
+.env.*
