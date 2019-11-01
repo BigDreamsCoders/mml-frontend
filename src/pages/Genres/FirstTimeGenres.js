@@ -1,9 +1,8 @@
-import React from "react";
-import { useEffect, useState } from 'react';
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { MainLayout } from "../../layout/MainLayout";
 import { GenreList } from "../../components/GenreList.js";
 import { Constants } from "../../utils/Constants";
+import { withToken } from "../../axios/instance/auth";
 
 export const FirstTimeGenres = props => {
   const [data, setData] = useState({genres: [], isFetching: false});
@@ -11,10 +10,13 @@ export const FirstTimeGenres = props => {
         const fetchGenres = async () => {
             try {
                 setData({genres: data.genres, isFetching: true});
-                var config = {
-                  headers: {'Authorization':window.localStorage.getItem(Constants.TOKEN)}
-                };
-                const response = await axios.get(process.env.REACT_APP_API_URL+"/api/v1/genre/all",config);
+                const response = await withToken.get("/api/v1/genre/all", {
+					headers: {
+						Authorization: window.localStorage.getItem(
+							Constants.TOKEN,
+						),
+					},
+				});
                 console.log(response);
                 setData({genres: response.data, isFetching: false});
             } catch (e) {
