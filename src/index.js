@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from "react";
 import ReactDOM from "react-dom";
-import { Login } from "./pages/Auth/Login/Login";
+import Login from "./pages/Auth/Login/Login";
 import { SignUp } from "./pages/Auth/SignUp/SignUp";
 import { NotFound } from "./pages/404/404";
 import { FirstTimeGenres } from "./pages/Genres/FirstTimeGenres";

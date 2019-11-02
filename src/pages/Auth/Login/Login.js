@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "../../../components/Form";
 import { auth } from "../../../axios/instance/auth";
 import { AuthWrapper } from "../../../layout/Auth/AuthLayout";
+import { withRouter } from "react-router-dom";
 
 const initState = {
 	email: "",
@@ -26,7 +27,7 @@ const initState = {
 	},
 };
 
-export class Login extends React.Component {
+class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { ...initState };
@@ -43,8 +44,8 @@ export class Login extends React.Component {
 	}
 
 	handleLogin(event) {
-		const { handleLogin } = this.props;
 		event.preventDefault();
+		const { handleLogin, history } = this.props;
 		const { email, password } = this.state;
 		this.setState(
 			{
@@ -53,12 +54,14 @@ export class Login extends React.Component {
 			},
 			() => {
 				window.setTimeout(async () => {
+					console.log(process.env.REACT_APP_API_URL);
 					try {
 						const { data } = await auth.post("login", {
 							email,
 							password,
 						});
 						handleLogin(data.token);
+						history.push("/");
 					} catch (error) {
 						this.setState(
 							{
@@ -111,3 +114,5 @@ export class Login extends React.Component {
 		);
 	}
 }
+
+export default withRouter(Login);
