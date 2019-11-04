@@ -31,7 +31,7 @@ class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { ...initState };
-		this.handleLogin = this.handleLogin.bind(this);
+		this.loginHandler = this.loginHandler.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.onDismiss = this.onDismiss.bind(this);
 	}
@@ -43,7 +43,7 @@ class Login extends React.Component {
 		});
 	}
 
-	handleLogin(event) {
+	loginHandler(event) {
 		event.preventDefault();
 		const { handleLogin, history } = this.props;
 		const { email, password } = this.state;
@@ -104,7 +104,7 @@ class Login extends React.Component {
 			>
 				<Form
 					info={this.state.info}
-					actionHandler={this.handleLogin}
+					actionHandler={this.loginHandler}
 					changeHandle={this.handleChange}
 					values={[email, password]}
 					loading={loading}

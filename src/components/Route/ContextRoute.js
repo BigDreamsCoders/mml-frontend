@@ -19,8 +19,8 @@ export const ContextRoute = ({
 					handleLogin: token => {
 						dispatch({ type: LoginAction.LOGIN, payload: token });
 					},
-					handleLogout: token => {
-						dispatch({ type: LoginAction.LOGOUT, payload: token });
+					handleLogout: () => {
+						dispatch({ type: LoginAction.LOGOUT });
 					},
 				}}
 			>

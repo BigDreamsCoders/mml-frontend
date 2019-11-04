@@ -1,0 +1,67 @@
+@import "src/variable.scss";
+@import "src/mixins.scss";
+
+.main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    min-height: 150px;
+    border-radius: .2em;
+    align-self: center;
+    margin: 0 auto;
+    border: .2em solid $primaryColor;
+    transition: all ease-in-out .3s;
+    animation: fadein .3s ease-in-out both;
+
+    img,
+    h3 {
+        align-self: center;
+    }
+}
+
+.active {
+    border: .2em solid $primaryColor;
+    background: #EBEBE4;
+}
+
+.mark {
+    position: absolute;
+    bottom: 0px;
+    right: 5px;
+    transition: all ease-in-out .3s;
+
+    i {
+        color: #4BB543;
+    }
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@include responsive-max(exsm) {}
+
+@include responsive-min(exsm) {}
+
+@include responsive-min(md) {}
+
+@include responsive-min(ld) {
+    .mark>i {
+        font-size: 1.2em;
+    }
+}
+
+@include responsive-min(xl) {}
