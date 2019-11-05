@@ -5,10 +5,14 @@ import { Constants } from "../../utils/Constants";
 import { withToken } from "../../axios/instance/auth";
 import { main, loader } from "./FirstTimeGenres.module.scss";
 import { withRouter } from "react-router-dom";
+import { ErrorBoundary } from "../../components/ErrorBoudary/ErrorBoudary";
 
 const initState = {
 	genres: [],
 	isFetching: false,
+	isSkipping: true,
+	networkError: false,
+	hasError: false,
 };
 
 class FirstTimeGenres extends React.Component {
@@ -17,6 +21,14 @@ class FirstTimeGenres extends React.Component {
 		this.state = { ...initState };
 		this.handleCardClick = this.handleCardClick.bind(this);
 	}
+
+	static getDerivedStateFromError() {
+		return {
+			hasError: true,
+		};
+	}
+
+	componentDidCatch() {}
 
 	async componentDidMount() {
 		const { history, handleLogout } = this.props;
@@ -37,13 +49,28 @@ class FirstTimeGenres extends React.Component {
 				isFetching: false,
 				genres,
 			});
-		} catch ({ response }) {
-			switch (response.status) {
+		} catch (e) {
+			let response;
+			try {
+				response = e.response;
+				response = response.status;
+			} catch (e) {
+				this.setState({
+					isFetching: false,
+					hasError: true,
+				});
+				return;
+			}
+			switch (response) {
 				case 403:
 					handleLogout();
 					history.push("/login");
 					break;
 				default:
+					this.setState({
+						isFetching: false,
+						networkError: true,
+					});
 					break;
 			}
 		}
@@ -52,14 +79,18 @@ class FirstTimeGenres extends React.Component {
 	handleCardClick(index) {
 		const genres = this.state.genres.slice();
 		genres[index].isSelected = !genres[index].isSelected;
+		const skip = genres.filter(element => {
+			return element.isSelected;
+		}).length;
 		this.setState({
 			genres,
+			isSkipping: skip >= 3,
 		});
 	}
 
 	render() {
-		const { genres, isFetching } = this.state;
-		const content = () => {
+		const { genres, isFetching, networkError, hasError } = this.state;
+		const page = () => {
 			if (isFetching) {
 				return (
 					<div className={loader}>
@@ -70,22 +101,60 @@ class FirstTimeGenres extends React.Component {
 						</div>
 					</div>
 				);
+			} else if (networkError) {
+				return (
+					<img
+						src="https://cdn3.iconfinder.com/data/icons/wifi-2/460/connection-error-512.png"
+						alt="error icon"
+					/>
+				);
 			} else {
 				return (
-					<GenreList
-						list={genres}
-						onClick={index => {
-							this.handleCardClick(index);
-						}}
-					/>
+					<>
+						<GenreList
+							list={genres}
+							onClick={index => {
+								this.handleCardClick(index);
+							}}
+						/>
+						{this.state.isSkipping ? "Skip" : null}
+					</>
 				);
 			}
 		};
-
 		return (
-			<MainLayout title="Set up">
-				<main className={main}>{content()}</main>
-			</MainLayout>
+			<ErrorBoundary>
+				{hasError ? (
+					<div
+						style={{
+							display: "flex",
+							flexDirection: "column",
+							minWidth: "100vw",
+							minHeight: "100vh",
+							justifyContent: "center",
+							alignContent: "center",
+						}}
+					>
+						<h2>Hubo un error, aqui tienes un perro</h2>
+						<img
+							src="https://www.searchpng.com/wp-content/uploads/2019/01/Labrador-dog-PNG-715x715.png"
+							alt="error"
+							style={{ width: "40%", height: "40%" }}
+						/>
+					</div>
+				) : (
+					<MainLayout title="Set up">
+						<main className={main}>
+							<h3>Selecciona almenos 3 categorías</h3>
+							<p>
+								Puedes saltarte este paso, pero no te podremos
+								hacer sugerencias personalizadas
+							</p>
+							{page()}
+						</main>
+					</MainLayout>
+				)}
+			</ErrorBoundary>
 		);
 	}
 }
