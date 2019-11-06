@@ -61,7 +61,7 @@ class Login extends React.Component {
 							password,
 						});
 						handleLogin(data.token);
-						history.push("/");
+						history.push("/me");
 					} catch (error) {
 						this.setState(
 							{

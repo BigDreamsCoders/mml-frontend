@@ -123,7 +123,7 @@ class FirstTimeGenres extends React.Component {
 			}
 		};
 		return (
-			<ErrorBoundary>
+			<>
 				{hasError ? (
 					<div
 						style={{
@@ -154,7 +154,7 @@ class FirstTimeGenres extends React.Component {
 						</main>
 					</MainLayout>
 				)}
-			</ErrorBoundary>
+			</>
 		);
 	}
 }
