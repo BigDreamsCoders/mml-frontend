@@ -3,9 +3,8 @@ import { MainLayout } from "../../layout/MainLayout";
 import { GenreList } from "../../components/Genre/GenreList.js";
 import { Constants } from "../../utils/Constants";
 import { withToken } from "../../axios/instance/auth";
-import { main, loader } from "./FirstTimeGenres.module.scss";
+import { fab, main, loader } from "./FirstTimeGenres.module.scss";
 import { withRouter } from "react-router-dom";
-import { ErrorBoundary } from "../../components/ErrorBoudary/ErrorBoudary";
 
 const initState = {
 	genres: [],
@@ -21,14 +20,6 @@ class FirstTimeGenres extends React.Component {
 		this.state = { ...initState };
 		this.handleCardClick = this.handleCardClick.bind(this);
 	}
-
-	static getDerivedStateFromError() {
-		return {
-			hasError: true,
-		};
-	}
-
-	componentDidCatch() {}
 
 	async componentDidMount() {
 		const { history, handleLogout } = this.props;
@@ -88,6 +79,11 @@ class FirstTimeGenres extends React.Component {
 		});
 	}
 
+	handleContinue() {
+		const { history } = this.props;
+		history.push("/me");
+	}
+
 	render() {
 		const { genres, isFetching, networkError, hasError } = this.state;
 		const page = () => {
@@ -117,7 +113,17 @@ class FirstTimeGenres extends React.Component {
 								this.handleCardClick(index);
 							}}
 						/>
-						{this.state.isSkipping ? "Skip" : null}
+						<button
+							className={`${fab} btn`}
+							onClick={() => {
+								this.handleContinue();
+							}}
+						>
+							{this.state.isSkipping ? "Skip" : "Continue"}
+							<i className="material-icons">
+								keyboard_arrow_right
+							</i>
+						</button>
 					</>
 				);
 			}

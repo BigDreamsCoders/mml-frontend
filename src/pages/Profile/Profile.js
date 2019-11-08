@@ -9,6 +9,7 @@ import {
 	status,
 	button,
 } from "./Profile.module.scss";
+import { Dashboard } from "../../components/Dashboard/Dashboard";
 
 export const Profile = () => {
 	return (
@@ -32,7 +33,7 @@ export const Profile = () => {
 					</div>
 				</div>
 				<div className={dashboard}>
-					<button>que pedo</button>
+					<Dashboard />
 				</div>
 			</main>
 		</MainLayout>

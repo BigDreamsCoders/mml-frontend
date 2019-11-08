@@ -1,16 +1,16 @@
 @import "src/variable.scss";
 
 .navbar {
-  background-color: $primaryColor;
+    background-color: $primaryColor;
 
-  a {
-    color: white;
-  }
+    a {
+        color: white;
+    }
 }
 
 .footer {
-  background-color: $primaryColor;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+    background-color: $primaryColorDarker;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
