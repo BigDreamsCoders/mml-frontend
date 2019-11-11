@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { MainLayout } from "../../layout/MainLayout";
 import SongList from "../../components/SongList.js";
 import { Constants } from "../../utils/Constants";
@@ -13,13 +13,13 @@ const initState = {
 	hasError: false,
 };
 
-class Main extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {...initState};
-  }
+class Main extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = { ...initState };
+	}
 
-  async componentDidMount() {
+	async componentDidMount() {
 		const { history, handleLogout } = this.props;
 		try {
 			this.setState({
@@ -62,14 +62,14 @@ class Main extends React.Component{
 		}
 	}
 
-  render(){
-    const {songs} = this.state;
-    return(
-      <MainLayout title="Set up">
-        <SongList list={songs}/>
-      </MainLayout>
-    );
-  }
+	render() {
+		const { songs } = this.state;
+		return (
+			<MainLayout title="Set up">
+				<SongList list={songs} />
+			</MainLayout>
+		);
+	}
 }
 
 export default withRouter(Main);

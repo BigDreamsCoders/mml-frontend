@@ -9,11 +9,21 @@ const Song = props => (
 			<div className="col-md-10">
 				<div className="card-body">
 					<h2 className="card-title">{props.title}</h2>
-					<h4 className="card-text text-muted">{props.description}</h4>
-					<p className="card-subtitle text-muted">Genre: {props.genre.name}</p>
-					<p className="card-subtitle text-muted">Length: {props.length}</p>
-					<p className="card-subtitle text-muted">Rating: {props.rating}</p>
-					<a href={props.youtubeLink}><p>Youtube link</p></a>
+					<h4 className="card-text text-muted">
+						{props.description}
+					</h4>
+					<p className="card-subtitle text-muted">
+						Genre: {props.genre.name}
+					</p>
+					<p className="card-subtitle text-muted">
+						Length: {props.length}
+					</p>
+					<p className="card-subtitle text-muted">
+						Rating: {props.rating}
+					</p>
+					<a href={props.youtubeLink}>
+						<p>Youtube link</p>
+					</a>
 				</div>
 			</div>
 		</div>
