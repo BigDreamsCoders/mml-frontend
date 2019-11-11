@@ -1,0 +1,29 @@
+@import "src/variable.scss";
+
+.main {
+    min-height: 100vh;
+
+    h3,
+    p {
+        text-align: center;
+    }
+}
+
+.fab {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    border-radius: 5px;
+    /* TODO poner sombra */
+    background: $primaryColor !important;
+    color: white !important;
+    display: flex !important;
+    justify-content: center;
+}
+
+.loader {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

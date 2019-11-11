@@ -1,0 +1,11 @@
+*.scss
+*.txt
+*.png
+/public/
+.editorconfig
+.gitignore
+.prettierignore
+.prettierrc
+.env.*
+package.json
+package-lock.json

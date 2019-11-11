@@ -1,0 +1,25 @@
+@import "src/variable.scss";
+
+.tabs {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.inactiveTab {
+    &:after {
+        content: "";
+        display: block;
+        width: 40%;
+        padding-top: 20px;
+        border-bottom: 2px solid $primaryColor;
+        transition: .3s ease-in-out all;
+    }
+
+    &:hover:after {
+        width: 100%;
+    }
+}
+
+.activeTab {
+    border-bottom: 2px solid $primaryColor;
+}
