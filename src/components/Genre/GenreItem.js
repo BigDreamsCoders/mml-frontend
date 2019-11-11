@@ -19,7 +19,7 @@ export const GenreItem = props => {
 			style={delay(index)}
 			onClick={() => onClick()}
 		>
-			<img src={genre.url} alt="icon" />
+			<img src={genre.url} alt="icon" width="300px" height="300px" />
 			<h3>{genre.name}</h3>
 			{genre.isSelected ? (
 				<div className={mark}>

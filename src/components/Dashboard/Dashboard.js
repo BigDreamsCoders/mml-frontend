@@ -11,9 +11,9 @@ export const Dashboard = () => {
 					<Tab>Fav Artist</Tab>
 					<Tab>Fav Genres</Tab>
 				</TabList>
-				<TabPanel>Panel 1</TabPanel>
-				<TabPanel>Panel 2</TabPanel>
-				<TabPanel>Panel 3</TabPanel>
+				<TabPanel>Fav Songs</TabPanel>
+				<TabPanel>Fav Artist</TabPanel>
+				<TabPanel>Fav Genres</TabPanel>
 			</Tabs>
 		</>
 	);
