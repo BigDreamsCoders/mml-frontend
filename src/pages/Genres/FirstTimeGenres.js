@@ -9,7 +9,7 @@ import { withRouter } from "react-router-dom";
 const initState = {
 	genres: [],
 	isFetching: false,
-	isSkipping: true,
+	isSkipping: false,
 	networkError: false,
 	hasError: false,
 };
@@ -73,6 +73,7 @@ class FirstTimeGenres extends React.Component {
 		const skip = genres.filter(element => {
 			return element.isSelected;
 		}).length;
+		console.log(skip >= 3);
 		this.setState({
 			genres,
 			isSkipping: skip >= 3,
@@ -119,7 +120,7 @@ class FirstTimeGenres extends React.Component {
 								this.handleContinue();
 							}}
 						>
-							{this.state.isSkipping ? "Skip" : "Continue"}
+							{this.state.isSkipping ? "Continue" : "Skip"}
 							<i className="material-icons">
 								keyboard_arrow_right
 							</i>
