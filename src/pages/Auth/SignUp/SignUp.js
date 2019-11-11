@@ -2,12 +2,17 @@ import React from "react";
 import { Form } from "../../../components/Form";
 import { auth } from "../../../axios/instance/auth";
 import { AuthWrapper } from "../../../layout/Auth/AuthLayout";
+import { withRouter } from "react-router-dom";
 
 const initState = {
 	email: "",
 	password: "",
 	loading: false,
-	error: false,
+	error: {
+		hasError: false,
+		type: null,
+		msg: null,
+	},
 	errorMsg: "",
 	info: {
 		action: "Register",
@@ -26,13 +31,10 @@ const initState = {
 	},
 };
 
-export class SignUp extends React.Component {
+class SignUp extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { ...initState };
-		this.changeHanlder = this.changeHanlder.bind(this);
-		this.registerHandler = this.registerHandler.bind(this);
-		this.onDismiss = this.onDismiss.bind(this);
 	}
 
 	changeHanlder({ target }) {
@@ -44,7 +46,7 @@ export class SignUp extends React.Component {
 	}
 
 	registerHandler(e) {
-		const { handleLogin } = this.props;
+		const { handleLogin, history } = this.props;
 		e.preventDefault();
 		const { email, password } = this.state;
 		this.setState(
@@ -63,24 +65,39 @@ export class SignUp extends React.Component {
 						if (status === 201) {
 							const { token } = data;
 							handleLogin(token);
+							history.push("/first-time");
 						}
-					} catch (e) {
-						this.setState(
-							{
-								...this.state,
-								error: true,
-								errorMsg: "An error occurred",
-								loading: false,
-							},
-							() => {
-								window.setTimeout(() => {
-									this.setState({
-										...this.state,
-										error: false,
-									});
-								}, 2000);
-							},
-						);
+					} catch ({ request }) {
+						let { response, status } = request;
+						response = JSON.parse(response);
+						const err = {
+							error: true,
+							msg: "",
+						};
+						switch (status) {
+							case 401:
+								err.msg = response.message;
+								break;
+							case 422:
+								err.msg = response.errors.reduce(
+									(prev, self) => {
+										return `${prev} ${self.split(":")[1]},`;
+									},
+									"",
+								);
+								err.msg = err.msg.substring(
+									0,
+									err.msg.length - 1,
+								);
+								break;
+							default:
+								err.msg = "An error ocurred, try later";
+								break;
+						}
+						this.setState({
+							error: err,
+							loading: false,
+						});
 					}
 				}, 2000);
 			},
@@ -89,24 +106,32 @@ export class SignUp extends React.Component {
 
 	onDismiss() {
 		this.setState({
-			...this.state,
-			error: false,
+			error: {
+				hasError: false,
+				type: null,
+				msg: null,
+			},
 		});
 	}
 
 	render() {
-		const { info, email, password, error, errorMsg, loading } = this.state;
+		const { info, email, password, error, loading } = this.state;
 		return (
 			<AuthWrapper
 				title="SignUp"
 				error={error}
-				onDismiss={this.onDismiss}
-				errorMsg={errorMsg}
+				onDismiss={() => {
+					this.onDismiss();
+				}}
 			>
 				<Form
 					info={info}
-					actionHandler={this.registerHandler}
-					changeHandle={this.changeHanlder}
+					actionHandler={e => {
+						this.registerHandler(e);
+					}}
+					changeHandle={e => {
+						this.changeHanlder(e);
+					}}
 					values={[email, password]}
 					loading={loading}
 					register
@@ -115,3 +140,5 @@ export class SignUp extends React.Component {
 		);
 	}
 }
+
+export default withRouter(SignUp);

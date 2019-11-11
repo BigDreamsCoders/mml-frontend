@@ -8,7 +8,10 @@ const initState = {
 	email: "",
 	password: "",
 	loading: false,
-	error: false,
+	error: {
+		hasError: false,
+		msg: null,
+	},
 	errorMsg: "",
 	info: {
 		action: "Login",
@@ -31,15 +34,15 @@ class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { ...initState };
-		this.loginHandler = this.loginHandler.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-		this.onDismiss = this.onDismiss.bind(this);
 	}
 
 	onDismiss() {
 		this.setState({
-			...this.state,
-			error: false,
+			error: {
+				hasError: false,
+				type: null,
+				msg: null,
+			},
 		});
 	}
 
@@ -54,7 +57,6 @@ class Login extends React.Component {
 			},
 			() => {
 				window.setTimeout(async () => {
-					console.log(process.env.REACT_APP_API_URL);
 					try {
 						const { data } = await auth.post("login", {
 							email,
@@ -62,23 +64,35 @@ class Login extends React.Component {
 						});
 						handleLogin(data.token);
 						history.push("/me");
-					} catch (error) {
-						this.setState(
-							{
-								...this.state,
-								error: true,
-								loading: false,
-								errorMsg: "Something gone wrong, try again",
-							},
-							() => {
-								window.setTimeout(() => {
-									this.setState({
-										...this.state,
-										error: false,
-									});
-								}, 2000);
-							},
-						);
+					} catch ({ request }) {
+						let { response, status } = request;
+						response = JSON.parse(response);
+						console.log(response, status);
+						const err = {
+							error: true,
+							msg: "",
+						};
+						switch (status) {
+							case 422:
+								err.msg = response.errors.reduce(
+									(prev, self) => {
+										return `${prev} ${self.split(":")[1]},`;
+									},
+									"",
+								);
+								err.msg = err.msg.substring(
+									0,
+									err.msg.length - 1,
+								);
+								break;
+							default:
+								err.msg = "An error ocurred, try later";
+								break;
+						}
+						this.setState({
+							error: err,
+							loading: false,
+						});
 					}
 				}, 2000);
 			},
@@ -94,18 +108,23 @@ class Login extends React.Component {
 	}
 
 	render() {
-		const { email, password, error, errorMsg, loading } = this.state;
+		const { email, password, error, loading } = this.state;
 		return (
 			<AuthWrapper
 				title="Login"
 				error={error}
-				onDismiss={this.onDismiss}
-				errorMsg={errorMsg}
+				onDismiss={() => {
+					this.onDismiss();
+				}}
 			>
 				<Form
 					info={this.state.info}
-					actionHandler={this.loginHandler}
-					changeHandle={this.handleChange}
+					actionHandler={e => {
+						this.loginHandler(e);
+					}}
+					changeHandle={e => {
+						this.handleChange(e);
+					}}
 					values={[email, password]}
 					loading={loading}
 					login
