@@ -11,7 +11,7 @@ import { Constants } from "./utils/Constants";
 import "pace-js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
-import { Profile } from "./pages/Profile/Profile";
+import Profile from "./pages/Profile/Profile";
 import Main from "./pages/Main/Main";
 import { ErrorBoundary } from "./components/ErrorBoudary/ErrorBoudary";
 
@@ -60,7 +60,7 @@ const App = () => {
 						dispatch={dispatch}
 					/>
 					<ContextRoute
-						path="/home"
+						path="/"
 						exact
 						component={Main}
 						Context={AuthContext}

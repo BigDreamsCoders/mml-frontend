@@ -14,6 +14,7 @@ export const MainLayout = props => {
 			</Helmet>
 			<Navbar expand="md" className={navbar}>
 				<NavbarBrand href="/">MML</NavbarBrand>
+				<NavbarBrand href="/me">Profile</NavbarBrand>
 			</Navbar>
 			{props.children}
 			<footer className={footer}>
