@@ -67,7 +67,7 @@ class Main extends React.Component {
 		return (
 			<MainLayout title="Set up">
 				<h1>Music List</h1>
-				<SongList list={songs} />
+				<SongList favorite={true} list={songs} />
 			</MainLayout>
 		);
 	}

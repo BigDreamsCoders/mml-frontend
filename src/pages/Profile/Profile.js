@@ -48,6 +48,7 @@ class Profile extends React.Component {
 				},
 			});
 			const songs = data.element;
+			console.log(data.message+" "+songs);
 			this.setState({
 				isFetching: false,
 				songs,
