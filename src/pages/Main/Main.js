@@ -1,12 +1,13 @@
 import React from "react";
 import { MainLayout } from "../../layout/MainLayout";
-import SongList from "../../components/SongList.js";
 import { Constants } from "../../utils/Constants";
 import { withToken } from "../../axios/instance/auth";
 import { withRouter } from "react-router-dom";
+import { MainTabs } from "../../components/Dashboard/MainTabs.js";
 
 const initState = {
 	songs: [],
+	popularsongs: [],
 	isFetching: false,
 	isSkipping: true,
 	networkError: false,
@@ -25,15 +26,22 @@ class Main extends React.Component {
 			this.setState({
 				isFetching: true,
 			});
-			const { data } = await withToken.get("/api/v1/song/all", {
+			var { data } = await withToken.get("/api/v1/song/all", {
 				headers: {
 					Authorization: localStorage.getItem(Constants.TOKEN),
 				},
 			});
 			const songs = data;
+			var { data } = await withToken.get("/api/v1/song/best", {
+				headers: {
+					Authorization: localStorage.getItem(Constants.TOKEN),
+				},
+			});
+			const popularSongs = data;
 			this.setState({
 				isFetching: false,
 				songs,
+				popularSongs,
 			});
 		} catch (e) {
 			let response;
@@ -64,10 +72,11 @@ class Main extends React.Component {
 
 	render() {
 		const { songs } = this.state;
+		const { popularSongs } = this.state;
 		return (
 			<MainLayout title="Set up">
 				<h1>Music List</h1>
-				<SongList favorite={true} list={songs} />
+				<MainTabs list={songs} popularSongs={popularSongs}/>
 			</MainLayout>
 		);
 	}
