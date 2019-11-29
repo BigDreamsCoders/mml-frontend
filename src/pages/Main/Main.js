@@ -18,6 +18,12 @@ class Main extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { ...initState };
+		this.viewSong = this.viewSong.bind(this);
+	}
+
+	viewSong(s){
+		const { history, handleLogout } = this.props;
+		history.push({pathname: "/song", song:s});
 	}
 
 	async componentDidMount() {
@@ -76,7 +82,7 @@ class Main extends React.Component {
 		return (
 			<MainLayout title="Set up">
 				<h1>Music List</h1>
-				<MainTabs list={songs} popularSongs={popularSongs}/>
+				<MainTabs viewSong={this.viewSong} list={songs} popularSongs={popularSongs}/>
 			</MainLayout>
 		);
 	}

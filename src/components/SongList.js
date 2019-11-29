@@ -5,7 +5,7 @@ const SongList = (props) => {
 	return (
 		<div>
 			{props.list.map((item, i) => (
-				<Song favorite={props.favorite} key={i} {...item} />
+				<Song viewSong={props.viewSong} favorite={props.favorite} key={i} {...item} />
 			))}
 		</div>
 	);

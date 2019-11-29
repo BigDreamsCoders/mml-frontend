@@ -13,6 +13,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 import Profile from "./pages/Profile/Profile";
 import Main from "./pages/Main/Main";
+import SongDetail from "./pages/Main/SongDetail";
 import { ErrorBoundary } from "./components/ErrorBoudary/ErrorBoudary";
 
 const initState = {
@@ -55,6 +56,14 @@ const App = () => {
 						path="/me"
 						exact
 						component={Profile}
+						Context={AuthContext}
+						value={state}
+						dispatch={dispatch}
+					/>
+					<ContextRoute
+						path="/song"
+						exact
+						component={SongDetail}
 						Context={AuthContext}
 						value={state}
 						dispatch={dispatch}

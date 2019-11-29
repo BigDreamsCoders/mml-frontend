@@ -27,6 +27,7 @@ class Profile extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { ...initState };
+		this.viewSong = this.viewSong.bind(this);
 	}
 
 	logout(e){
@@ -80,6 +81,11 @@ class Profile extends React.Component {
 		}
 	}
 
+	viewSong(s){
+		const { history, handleLogout } = this.props;
+		history.push({pathname: "/song", song:s});
+	}
+
 	render(){
 		const {songs} = this.state;
 
@@ -107,7 +113,7 @@ class Profile extends React.Component {
 						</div>
 					</div>
 					<div className={dashboard}>
-						<Dashboard list={songs}/>
+						<Dashboard viewSong={this.viewSong} list={songs}/>
 					</div>
 				</main>
 			</MainLayout>

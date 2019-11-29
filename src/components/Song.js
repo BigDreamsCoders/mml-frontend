@@ -17,6 +17,7 @@ class Song extends React.Component{
 	}
 
 	async handleFavorite(e){
+		e.preventDefault();
 		const {code} = this.props;
 		const {favorite} = this.props;
 		var status = 0;
@@ -68,14 +69,8 @@ class Song extends React.Component{
 					<div className="col-md-10">
 						<div className="card-body">
 							<h2 className="card-title">{this.props.title}</h2>
-							<h4 className="card-text text-muted">
-								{this.props.description}
-							</h4>
 							<p className="card-subtitle text-muted">
-								Genre: {this.props.genre.name}
-							</p>
-							<p className="card-subtitle text-muted">
-								Length: {this.props.length}
+								{this.props.musicians.name}
 							</p>
 							<p className="card-subtitle text-muted">
 								Rating: {this.props.rating}
@@ -84,6 +79,7 @@ class Song extends React.Component{
 								<p>Youtube link</p>
 							</a>
 							<button onClick={e => {this.handleFavorite(e);}}>{message}</button>
+							<button onClick={e => {this.props.viewSong(this.props);}}>Mas informacion</button>
 						</div>
 					</div>
 				</div>

@@ -15,7 +15,7 @@ export const Dashboard = (props) => {
 				</TabList>
 				<TabPanel>
 					Fav Songs
-					<SongList favorite={false} list={list}/>
+					<SongList viewSong={props.viewSong} favorite={false} list={list}/>
 				</TabPanel>
 				<TabPanel>Fav Artist</TabPanel>
 				<TabPanel>Fav Genres</TabPanel>
