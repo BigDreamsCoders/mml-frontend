@@ -8,6 +8,8 @@ import { MainTabs } from "../../components/Dashboard/MainTabs.js";
 const initState = {
 	songs: [],
 	popularsongs: [],
+	artists: [],
+	genres: [],
 	isFetching: false,
 	isSkipping: true,
 	networkError: false,
@@ -37,17 +39,35 @@ class Main extends React.Component {
 					Authorization: localStorage.getItem(Constants.TOKEN),
 				},
 			});
+			console.log(data);
 			const songs = data;
 			var { data } = await withToken.get("/api/v1/song/best", {
 				headers: {
 					Authorization: localStorage.getItem(Constants.TOKEN),
 				},
 			});
+			console.log(data);
 			const popularSongs = data;
+			var { data } = await withToken.get("/api/v1/musician/all", {
+				headers: {
+					Authorization: localStorage.getItem(Constants.TOKEN),
+				},
+			});
+			console.log(data);
+			const artists = data;
+			var { data } = await withToken.get("/api/v1/genre/all", {
+				headers: {
+					Authorization: localStorage.getItem(Constants.TOKEN),
+				},
+			});
+			console.log(data);
+			const genres = data;
 			this.setState({
 				isFetching: false,
 				songs,
 				popularSongs,
+				artists,
+				genres,
 			});
 		} catch (e) {
 			let response;
@@ -77,12 +97,11 @@ class Main extends React.Component {
 	}
 
 	render() {
-		const { songs } = this.state;
-		const { popularSongs } = this.state;
+		const { songs, popularSongs, artists, genres } = this.state;
 		return (
 			<MainLayout title="Set up">
 				<h1>Music List</h1>
-				<MainTabs viewSong={this.viewSong} list={songs} popularSongs={popularSongs}/>
+				<MainTabs viewSong={this.viewSong} list={songs} popularSongs={popularSongs} artists={artists} genres={genres}/>
 			</MainLayout>
 		);
 	}
