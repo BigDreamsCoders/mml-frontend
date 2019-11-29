@@ -66,6 +66,7 @@ class Main extends React.Component {
 		const { songs } = this.state;
 		return (
 			<MainLayout title="Set up">
+				<h1>Music List</h1>
 				<SongList list={songs} />
 			</MainLayout>
 		);

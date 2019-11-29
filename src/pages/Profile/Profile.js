@@ -11,11 +11,22 @@ import {
 } from "./Profile.module.scss";
 import { Dashboard } from "../../components/Dashboard/Dashboard";
 import { withRouter } from "react-router-dom";
+import { Constants } from "../../utils/Constants";
+import { withToken } from "../../axios/instance/auth";
+
+const initState = {
+	songs: [],
+	isFetching: false,
+	isSkipping: true,
+	networkError: false,
+	hasError: false,
+};
 
 class Profile extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.state = { ...initState };
 	}
 
 	logout(e){
@@ -25,7 +36,52 @@ class Profile extends React.Component {
 			history.push("/login");
 	}
 
+	async componentDidMount() {
+		const { history, handleLogout } = this.props;
+		try {
+			this.setState({
+				isFetching: true,
+			});
+			const { data } = await withToken.get("/api/v1/rating/favorites", {
+				headers: {
+					Authorization: localStorage.getItem(Constants.TOKEN),
+				},
+			});
+			const songs = data.element;
+			this.setState({
+				isFetching: false,
+				songs,
+			});
+		} catch (e) {
+			let response;
+			try {
+				response = e.response;
+				response = response.status;
+			} catch (e) {
+				this.setState({
+					isFetching: false,
+					hasError: true,
+				});
+				return;
+			}
+			switch (response) {
+				case 403:
+					handleLogout();
+					history.push("/login");
+					break;
+				default:
+					this.setState({
+						isFetching: false,
+						networkError: true,
+					});
+					break;
+			}
+		}
+	}
+
 	render(){
+		const {songs} = this.state;
+
 		return (
 			<MainLayout title="Profile">
 				<main className={main}>
@@ -50,7 +106,7 @@ class Profile extends React.Component {
 						</div>
 					</div>
 					<div className={dashboard}>
-						<Dashboard />
+						<Dashboard list={songs}/>
 					</div>
 				</main>
 			</MainLayout>
