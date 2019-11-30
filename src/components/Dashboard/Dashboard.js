@@ -3,8 +3,8 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { inactiveTab, activeTab, tabs } from "./Dashboard.module.scss";
 import SongList from "../SongList.js";
-export const Dashboard = (props) => {
-	const {list} = props;
+export const Dashboard = props => {
+	const { list } = props;
 	return (
 		<>
 			<Tabs selectedTabClassName={activeTab}>
@@ -15,7 +15,11 @@ export const Dashboard = (props) => {
 				</TabList>
 				<TabPanel>
 					Fav Songs
-					<SongList viewSong={props.viewSong} favorite={false} list={list}/>
+					<SongList
+						viewSong={props.viewSong}
+						favorite={false}
+						list={list}
+					/>
 				</TabPanel>
 				<TabPanel>Fav Artist</TabPanel>
 				<TabPanel>Fav Genres</TabPanel>

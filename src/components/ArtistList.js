@@ -1,7 +1,7 @@
 import React from "react";
 import Artist from "./Artist.js";
 
-const ArtistList = (props) => {
+const ArtistList = props => {
 	return (
 		<div>
 			{props.list.map((item, i) => (
@@ -9,6 +9,6 @@ const ArtistList = (props) => {
 			))}
 		</div>
 	);
-}
+};
 
 export default ArtistList;

@@ -1,7 +1,7 @@
 import React from "react";
 import Genre from "./Genre.js";
 
-const GenreList = (props) => {
+const GenreList = props => {
 	return (
 		<div>
 			{props.list.map((item, i) => (
@@ -9,6 +9,6 @@ const GenreList = (props) => {
 			))}
 		</div>
 	);
-}
+};
 
 export default GenreList;

@@ -6,8 +6,8 @@ import SongList from "../SongList.js";
 import ArtistList from "../ArtistList.js";
 import GenreList from "../GenreList.js";
 
-export const MainTabs = (props) => {
-	const {list, popularSongs, artists, genres} = props;
+export const MainTabs = props => {
+	const { list, popularSongs, artists, genres } = props;
 	return (
 		<>
 			<Tabs selectedTabClassName={activeTab}>
@@ -19,19 +19,27 @@ export const MainTabs = (props) => {
 				</TabList>
 				<TabPanel>
 					<p>Songs</p>
-					<SongList viewSong={props.viewSong} favorite={true} list={list}/>
+					<SongList
+						viewSong={props.viewSong}
+						favorite={true}
+						list={list}
+					/>
 				</TabPanel>
 				<TabPanel>
 					<p>Most Popular</p>
-					<SongList viewSong={props.viewSong} favorite={true} list={popularSongs}/>
+					<SongList
+						viewSong={props.viewSong}
+						favorite={true}
+						list={popularSongs}
+					/>
 				</TabPanel>
 				<TabPanel>
 					<p>Artists</p>
-					<ArtistList list={artists}/>
+					<ArtistList list={artists} />
 				</TabPanel>
 				<TabPanel>
 					<p>Genres</p>
-					<GenreList list={genres}/>
+					<GenreList list={genres} />
 				</TabPanel>
 			</Tabs>
 		</>
