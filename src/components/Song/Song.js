@@ -11,13 +11,13 @@ const initState = {
 	networkError: false,
 	hasError: false,
 	song: {},
-    favorite:true
+    favorite:false
 };
 
 class Song extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { ...initState, song: this.props };
+		this.state = { ...initState, song: this.props, favorite:this.props.favorite };
 		console.log(this.props);
 	}
 
