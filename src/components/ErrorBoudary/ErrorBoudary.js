@@ -1,4 +1,5 @@
 import React from "react";
+import { error } from "./ErrorBoundary.module.scss";
 
 const initState = {
 	hasError: false,
@@ -22,10 +23,12 @@ export class ErrorBoundary extends React.Component {
 		const { children } = this.props;
 		if (hasError) {
 			return (
-				<img
-					src="https://www.searchpng.com/wp-content/uploads/2019/01/Labrador-dog-PNG-715x715.png"
-					alt="error"
-				/>
+				<div className={error}>
+					<img
+						src="https://www.searchpng.com/wp-content/uploads/2019/01/Labrador-dog-PNG-715x715.png"
+						alt="error"
+					/>
+				</div>
 			);
 		}
 		return children;

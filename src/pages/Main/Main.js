@@ -23,9 +23,9 @@ class Main extends React.Component {
 		this.viewSong = this.viewSong.bind(this);
 	}
 
-	viewSong(s){
+	viewSong(s) {
 		const { history, handleLogout } = this.props;
-		history.push({pathname: "/song", song:s});
+		history.push({ pathname: "/song", song: s });
 	}
 
 	async componentDidMount() {
@@ -41,13 +41,13 @@ class Main extends React.Component {
 			});
 			console.log(data);
 			const songs = data;
-			var { data } = await withToken.get("/api/v1/song/best", {
+			/* var { data } = await withToken.get("/api/v1/song/best", {
 				headers: {
 					Authorization: localStorage.getItem(Constants.TOKEN),
 				},
 			});
 			console.log(data);
-			const popularSongs = data;
+			const popularSongs = data; */
 			var { data } = await withToken.get("/api/v1/musician/all", {
 				headers: {
 					Authorization: localStorage.getItem(Constants.TOKEN),
@@ -65,7 +65,7 @@ class Main extends React.Component {
 			this.setState({
 				isFetching: false,
 				songs,
-				popularSongs,
+
 				artists,
 				genres,
 			});
@@ -98,10 +98,17 @@ class Main extends React.Component {
 
 	render() {
 		const { songs, popularSongs, artists, genres } = this.state;
+		console.log(songs);
 		return (
 			<MainLayout title="Set up">
 				<h1>Music List</h1>
-				<MainTabs viewSong={this.viewSong} list={songs} popularSongs={popularSongs} artists={artists} genres={genres}/>
+				<MainTabs
+					viewSong={this.viewSong}
+					list={songs}
+					popularSongs={popularSongs}
+					artists={artists}
+					genres={genres}
+				/>
 			</MainLayout>
 		);
 	}

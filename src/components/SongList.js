@@ -1,14 +1,19 @@
 import React from "react";
-import Song from "./Song.js";
+import Song from "./Song/Song";
 
-const SongList = (props) => {
+const SongList = props => {
 	return (
 		<div>
 			{props.list.map((item, i) => (
-				<Song viewSong={props.viewSong} favorite={props.favorite} key={i} {...item} />
+				<Song
+					viewSong={props.viewSong}
+					favorite={props.favorite}
+					key={i}
+					{...item}
+				/>
 			))}
 		</div>
 	);
-}
+};
 
 export default SongList;

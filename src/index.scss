@@ -156,3 +156,13 @@ body {
         height: 26px;
     }
 }
+
+$react-rater-link: #ccc !default; // color of star not rated
+
+.will-be-active{
+    color:rgb(207, 116, 107)!important;
+}
+
+.is-active{
+    color:rgb(255, 138, 128)!important;
+}
