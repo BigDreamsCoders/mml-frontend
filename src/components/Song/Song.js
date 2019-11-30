@@ -1,7 +1,7 @@
 import React from "react";
 import { Constants } from "../../utils/Constants";
 import { withToken } from "../../axios/instance/auth";
-import { fav } from "./Song.module.scss";
+import { fav, container } from "./Song.module.scss";
 import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
 
@@ -91,12 +91,15 @@ class Song extends React.Component {
 		return (
 			<div
 				className="card bg-light border-light mb-3"
-				onClick={e => {
-					//this.props.viewSong(this.props);
-				}}
+				style={{ margin: "1em" }}
 			>
-				<div className="row no-gutters">
-					<div className="col-md-2">
+				<div className={container}>
+					<div
+						className="col-md-10"
+						onClick={e => {
+							this.props.viewSong(this.state.song);
+						}}
+					>
 						<img src={thumbNail} className="card-img" alt=""></img>
 					</div>
 					<div className="col-md-10">

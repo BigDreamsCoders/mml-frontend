@@ -1,9 +1,10 @@
 import React from "react";
 import Song from "./Song/Song";
+import { container } from "./SongList.module.scss";
 
 const SongList = props => {
 	return (
-		<div>
+		<div className={container}>
 			{props.list.map((item, i) => (
 				<Song
 					viewSong={props.viewSong}

@@ -18,7 +18,6 @@ export const MainTabs = props => {
 					<Tab>Genres</Tab>
 				</TabList>
 				<TabPanel>
-					<p>Songs</p>
 					<SongList
 						viewSong={props.viewSong}
 						favorite={true}
@@ -27,11 +26,11 @@ export const MainTabs = props => {
 				</TabPanel>
 				<TabPanel>
 					<p>Most Popular</p>
-					<SongList
+					{/* <SongList
 						viewSong={props.viewSong}
 						favorite={true}
 						list={popularSongs}
-					/>
+					/> */}
 				</TabPanel>
 				<TabPanel>
 					<p>Artists</p>

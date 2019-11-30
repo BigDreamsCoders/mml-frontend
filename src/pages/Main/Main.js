@@ -4,7 +4,8 @@ import { Constants } from "../../utils/Constants";
 import { withToken } from "../../axios/instance/auth";
 import { withRouter } from "react-router-dom";
 import { MainTabs } from "../../components/Dashboard/MainTabs.js";
-
+import { main } from "./Main.module.scss";
+import { loader } from "./../Genres/FirstTimeGenres.module.scss";
 const initState = {
 	songs: [],
 	popularsongs: [],
@@ -71,6 +72,7 @@ class Main extends React.Component {
 			});
 		} catch (e) {
 			let response;
+			console.log(e.response);
 			try {
 				response = e.response;
 				response = response.status;
@@ -97,18 +99,31 @@ class Main extends React.Component {
 	}
 
 	render() {
-		const { songs, popularSongs, artists, genres } = this.state;
+		const { isFetching, songs, popularSongs, artists, genres } = this.state;
 		console.log(songs);
 		return (
 			<MainLayout title="Set up">
-				<h1>Music List</h1>
-				<MainTabs
-					viewSong={this.viewSong}
-					list={songs}
-					popularSongs={popularSongs}
-					artists={artists}
-					genres={genres}
-				/>
+				<main className={main}>
+					<h1>Music List</h1>
+					{isFetching && (
+						<div className={loader}>
+							<div className="lds-facebook">
+								<div></div>
+								<div></div>
+								<div></div>
+							</div>
+						</div>
+					)}
+					{!isFetching && (
+						<MainTabs
+							viewSong={this.viewSong}
+							list={songs}
+							popularSongs={popularSongs}
+							artists={artists}
+							genres={genres}
+						/>
+					)}
+				</main>
 			</MainLayout>
 		);
 	}
