@@ -41,7 +41,7 @@ class Main extends React.Component {
 				},
 			});
 			console.log(data);
-			const songs = data;
+			const songs = data.songs;
 			/* var { data } = await withToken.get("/api/v1/song/best", {
 				headers: {
 					Authorization: localStorage.getItem(Constants.TOKEN),
