@@ -23,18 +23,17 @@ const initState = {
 };
 
 class Profile extends React.Component {
-
 	constructor(props) {
 		super(props);
 		this.state = { ...initState };
 		this.viewSong = this.viewSong.bind(this);
 	}
 
-	logout(e){
-			e.preventDefault();
-			const {handleLogout, history} = this.props;
-			handleLogout();
-			history.push("/login");
+	logout(e) {
+		e.preventDefault();
+		const { handleLogout, history } = this.props;
+		handleLogout();
+		history.push("/login");
 	}
 
 	async componentDidMount() {
@@ -49,7 +48,7 @@ class Profile extends React.Component {
 				},
 			});
 			const songs = data.element;
-			console.log(data.message+" "+songs);
+			console.log(data.message + " " + songs);
 			this.setState({
 				isFetching: false,
 				songs,
@@ -81,13 +80,13 @@ class Profile extends React.Component {
 		}
 	}
 
-	viewSong(s){
+	viewSong(s) {
 		const { history, handleLogout } = this.props;
-		history.push({pathname: "/song", song:s});
+		history.push({ pathname: "/song", song: s });
 	}
 
-	render(){
-		const {songs} = this.state;
+	render() {
+		const { songs } = this.state;
 
 		return (
 			<MainLayout title="Profile">
@@ -102,7 +101,13 @@ class Profile extends React.Component {
 								<h3>Pedro Gómez</h3>
 							</div>
 							<div>
-								<button onClick={e => {this.logout(e);}}>Logout</button>
+								<button
+									onClick={e => {
+										this.logout(e);
+									}}
+								>
+									Logout
+								</button>
 							</div>
 						</div>
 						<button className={`${button} btn btn-primary`}>
@@ -113,12 +118,12 @@ class Profile extends React.Component {
 						</div>
 					</div>
 					<div className={dashboard}>
-						<Dashboard viewSong={this.viewSong} list={songs}/>
+						<Dashboard viewSong={this.viewSong} list={songs} />
 					</div>
 				</main>
 			</MainLayout>
 		);
 	}
-};
+}
 
 export default withRouter(Profile);
