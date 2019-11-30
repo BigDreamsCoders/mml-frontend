@@ -106,7 +106,7 @@ class Song extends React.Component {
 						<div className="card-body">
 							<h2 className="card-title">{title}</h2>
 							<p className="card-subtitle text-muted">
-								{this.props.musicians.name}
+								{this.props.album[0].musician.name}
 							</p>
 							<div>
 								<Rater
