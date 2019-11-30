@@ -11,6 +11,7 @@ const initState = {
 	networkError: false,
 	hasError: false,
 	song: {},
+    favorite:true
 };
 
 class Song extends React.Component {
@@ -22,7 +23,8 @@ class Song extends React.Component {
 
 	async handleFavorite(e) {
 		e.preventDefault();
-		const { code, favorite } = this.state.song;
+		const { code } = this.state.song;
+        const {favorite} = this.state;
 		var status = 0;
 		if (favorite) {
 			status = 1;
@@ -78,16 +80,16 @@ class Song extends React.Component {
 
 	render() {
 		const {
-			favorite,
 			rating,
 			musicians,
 			thumbNail,
 			title,
 		} = this.state.song;
-		/* var message = "favorite_border";
+        const {favorite}=this.state;,
+		var message = "favorite_border";
 		if (favorite) {
 			message = "favorite";
-		} */
+		}
 		return (
 			<div
 				className="card bg-light border-light mb-3"
