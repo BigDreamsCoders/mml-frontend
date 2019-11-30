@@ -114,14 +114,14 @@ class Song extends React.Component {
 									}}
 								/>
 							</div>
-							{/* <i
+							<i
 								className={`material-icons ${fav}`}
 								onClick={e => {
 									this.handleFavorite(e);
 								}}
 							>
 								{message}
-							</i> */}
+							</i>
 						</div>
 					</div>
 				</div>
