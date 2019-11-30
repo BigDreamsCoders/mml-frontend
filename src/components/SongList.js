@@ -1,13 +1,20 @@
 import React from "react";
-import Song from "./Song.js";
+import Song from "./Song/Song";
+import { container } from "./SongList.module.scss";
 
-const SongList = props => (
-	<div>
-		<h1>Music List</h1>
-		{props.list.map((item, i) => (
-			<Song key={i} {...item} />
-		))}
-	</div>
-);
+const SongList = props => {
+	return (
+		<div className={container}>
+			{props.list.map((item, i) => (
+				<Song
+					viewSong={props.viewSong}
+					favorite={props.favorite}
+					key={i}
+					{...item}
+				/>
+			))}
+		</div>
+	);
+};
 
 export default SongList;
