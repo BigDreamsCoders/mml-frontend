@@ -85,7 +85,7 @@ class Song extends React.Component {
 			thumbNail,
 			title,
 		} = this.state.song;
-        const {favorite}=this.state;,
+        const {favorite}=this.state;
 		var message = "favorite_border";
 		if (favorite) {
 			message = "favorite";
