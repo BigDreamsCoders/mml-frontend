@@ -96,9 +96,6 @@ class Song extends React.Component {
 				<div className={container}>
 					<div
 						className="col-md-10"
-						onClick={e => {
-							this.props.viewSong(this.state.song);
-						}}
 					>
 						<img src={thumbNail} className="card-img" alt=""></img>
 					</div>
