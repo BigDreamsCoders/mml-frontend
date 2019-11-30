@@ -121,6 +121,7 @@ class Main extends React.Component {
 							popularSongs={popularSongs}
 							artists={artists}
 							genres={genres}
+                            favorite={true}
 						/>
 					)}
 				</main>
